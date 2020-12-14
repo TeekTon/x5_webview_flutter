@@ -43,8 +43,8 @@ class X5WebView(private val context: Context, private val id: Int, private val p
                 loadUrl(params["url"].toString())
             }
 
-            if(params["userAgentString"] != null){
-                settings.userAgentString=params["userAgentString"].toString()
+            if (params["userAgentString"] != null) {
+                settings.userAgentString = params["userAgentString"].toString()
             }
 
             val urlInterceptEnabled = params["urlInterceptEnabled"] as Boolean
@@ -54,7 +54,7 @@ class X5WebView(private val context: Context, private val id: Int, private val p
 
                     if (urlInterceptEnabled) {
                         val arg = hashMapOf<String, String>()
-                        arg["url"] = loadUrl?:""
+                        arg["url"] = loadUrl ?: ""
                         channel.invokeMethod("onUrlLoading", arg)
                         return true
                     }
@@ -80,8 +80,8 @@ class X5WebView(private val context: Context, private val id: Int, private val p
                     arg["url"] = url
                     channel.invokeMethod("onPageFinished", arg)
                 }
-
             }
+
             webChromeClient = object : WebChromeClient() {
                 override fun onShowCustomView(view: View?, call: IX5WebChromeClient.CustomViewCallback?) {
                     super.onShowCustomView(view, call)
@@ -100,6 +100,13 @@ class X5WebView(private val context: Context, private val id: Int, private val p
                     arg["progress"] = p1
                     channel.invokeMethod("onProgressChanged", arg)
                 }
+
+                override fun onConsoleMessage(message: com.tencent.smtt.export.external.interfaces.ConsoleMessage?): Boolean {
+                    var line = message!!.lineNumber();
+                    android.util.Log.d("x5", "$line:" + message?.message());
+                    return true;
+                }
+
             }
 
 //            val data= Bundle()

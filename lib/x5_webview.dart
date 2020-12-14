@@ -142,8 +142,7 @@ class X5WebViewController {
 
   ///  直接使用X5WebView(javascriptChannels:JavascriptChannels(names, (name, data) { }))
   @deprecated
-  Future<void> addJavascriptChannels(
-      List<String> names, MessageReceived callback) async {
+  Future<void> addJavascriptChannels(List<String> names, MessageReceived callback) async {
     assert(names != null);
     await _channel.invokeMethod("addJavascriptChannels", {'names': names});
     _channel.setMethodCallHandler((call) {
@@ -223,8 +222,7 @@ class X5WebViewController {
         break;
 
       default:
-        throw MissingPluginException(
-            '${call.method} was invoked but has no handler');
+        throw MissingPluginException('${call.method} was invoked but has no handler');
         break;
     }
   }
