@@ -25,10 +25,18 @@ class X5WebView(private val context: Context, private val id: Int, private val p
         channel.setMethodCallHandler(this)
         webView.apply {
             settings.javaScriptEnabled = params["javaScriptEnabled"] as Boolean
-//            settings.useWideViewPort = true
-//            settings.domStorageEnabled = true
-//            settings.javaScriptCanOpenWindowsAutomatically = true
-//                settings.layoutAlgorithm=LayoutAlgorithm.SINGLE_COLUMN
+            settings.setBuiltInZoomControls(true)
+            settings.setDomStorageEnabled(true)
+            settings.setAllowFileAccess(true)
+            settings.setLayoutAlgorithm(com.tencent.smtt.sdk.WebSettings.LayoutAlgorithm.NARROW_COLUMNS)
+            settings.setSupportZoom(true)
+            settings.setUseWideViewPort(true)
+            settings.setSupportMultipleWindows(true)
+            settings.setAppCacheEnabled(true)
+            settings.setGeolocationEnabled(true)
+            settings.setAppCacheMaxSize(Long.MAX_VALUE)
+            settings.setPluginState(com.tencent.smtt.sdk.WebSettings.PluginState.ON_DEMAND)
+            settings.setAllowFileAccessFromFileURLs(true)
 
             if (params["javascriptChannels"] != null) {
                 val names = params["javascriptChannels"] as List<String>
