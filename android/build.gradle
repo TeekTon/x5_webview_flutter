@@ -66,6 +66,6 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.tencent.tbs.tbssdk:sdk:43967'
+    implementation 'com.tencent.tbs.tbssdk:sdk:43939'
     compileOnly files("$flutterRoot/bin/cache/artifacts/engine/android-arm/flutter.jar")
 }
