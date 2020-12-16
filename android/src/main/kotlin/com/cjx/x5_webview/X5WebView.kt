@@ -21,6 +21,7 @@ class X5WebView(private val context: Context, private val id: Int, private val p
     private val channel: MethodChannel = MethodChannel(messenger, "com.cjx/x5WebView_$id")
 
     init {
+        com.tencent.smtt.sdk.QbSdk.preinstallStaticTbs(context);
         webView = WebView(context)
         channel.setMethodCallHandler(this)
         webView.apply {
@@ -70,16 +71,6 @@ class X5WebView(private val context: Context, private val id: Int, private val p
                     return super.shouldOverrideUrlLoading(view, url)
                 }
 
-                override fun shouldOverrideUrlLoading(view: WebView, requset: WebResourceRequest?): Boolean {
-                    if (urlInterceptEnabled) {
-                        val arg = hashMapOf<String, String>()
-                        arg["url"] = requset?.url.toString()
-                        channel.invokeMethod("onUrlLoading", arg)
-                        return true
-                    }
-                    view.loadUrl(requset?.url.toString())
-                    return super.shouldOverrideUrlLoading(view, requset)
-                }
 
                 override fun onPageFinished(p0: WebView?, url: String) {
                     super.onPageFinished(p0, url)

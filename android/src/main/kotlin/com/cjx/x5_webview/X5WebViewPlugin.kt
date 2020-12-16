@@ -71,8 +71,8 @@ class X5WebViewPlugin : MethodCallHandler, FlutterPlugin, ActivityAware {
         when (call.method) {
             "init" -> {
                 val map = hashMapOf<String, Any>()
-                map[TbsCoreSettings.TBS_SETTINGS_USE_SPEEDY_CLASSLOADER] = true
-                map[TbsCoreSettings.TBS_SETTINGS_USE_DEXLOADER_SERVICE] = true
+                // map[TbsCoreSettings.TBS_SETTINGS_USE_SPEEDY_CLASSLOADER] = true
+                // map[TbsCoreSettings.TBS_SETTINGS_USE_DEXLOADER_SERVICE] = true
                 QbSdk.initTbsSettings(map)
                 QbSdk.initX5Environment(mContext?.applicationContext, object : QbSdk.PreInitCallback {
                     override fun onCoreInitFinished() {
@@ -150,9 +150,9 @@ class X5WebViewPlugin : MethodCallHandler, FlutterPlugin, ActivityAware {
                 }
                 QbSdk.canOpenFile(mActivity, filePath) { canOpenFile ->
                     if (canOpenFile) {
-                        QbSdk.openFileReader(mActivity, filePath, params) { msg ->
+                        /*QbSdk.openFileReader(mActivity, filePath, params) { msg ->
                             Log.d("QbSdk", msg)
-                        }
+                        }*/
                     } else {
                         Toast.makeText(mContext, "X5Sdk无法打开此文件", Toast.LENGTH_LONG).show()
                         result.success("X5Sdk无法打开此文件")
