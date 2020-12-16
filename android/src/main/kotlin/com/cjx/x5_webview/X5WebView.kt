@@ -4,6 +4,7 @@ import android.annotation.TargetApi
 import android.content.Context
 import android.os.Build
 import android.view.View
+import android.util.Log
 import com.tencent.smtt.export.external.interfaces.IX5WebChromeClient
 import com.tencent.smtt.export.external.interfaces.WebResourceRequest
 import com.tencent.smtt.sdk.WebChromeClient
@@ -21,7 +22,9 @@ class X5WebView(private val context: Context, private val id: Int, private val p
     private val channel: MethodChannel = MethodChannel(messenger, "com.cjx/x5WebView_$id")
 
     init {
+        Log.d("x5", "loading core start!");
         com.tencent.smtt.sdk.QbSdk.preinstallStaticTbs(context);
+        Log.d("x5", "loading core finish!");
         webView = WebView(context)
         channel.setMethodCallHandler(this)
         webView.apply {
@@ -102,7 +105,7 @@ class X5WebView(private val context: Context, private val id: Int, private val p
 
                 override fun onConsoleMessage(message: com.tencent.smtt.export.external.interfaces.ConsoleMessage?): Boolean {
                     var line = message!!.lineNumber();
-                    android.util.Log.d("x5", "$line:" + message?.message());
+                    Log.d("x5", "$line:" + message?.message());
                     return true;
                 }
 
